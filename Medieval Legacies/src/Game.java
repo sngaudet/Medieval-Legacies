@@ -11,6 +11,7 @@ public class Game
 	
 	//Playable Kingdoms
 	Kingdom england = new Kingdom(100);
+	Kingdom france = new Kingdom(100);
 	
 	//Placeholder for the kingdom the player chooses
 	Kingdom playerK;
@@ -27,8 +28,6 @@ public class Game
 	public void start()
 	{
 		boolean valid = false;
-		//player kingdom
-		String playerKingdom = null;
 		
 		//***Play game***
 		
@@ -37,7 +36,8 @@ public class Game
 		
 		//Choose Kingdom
 		System.out.println("Playable Kingdoms:");
-		System.out.println(">England\n");
+		System.out.println(">England");
+		System.out.println(">France\n");
 		
 		do
 		{
@@ -45,19 +45,23 @@ public class Game
 			String input = stdIn.next();
 			if (input.equalsIgnoreCase("England")) 
 			{
-				playerKingdom = "England";
 				playerK = england;
+				playerK.playerKingdom = "England";
+				valid = true;
+			}
+			else if (input.equalsIgnoreCase("France")) 
+			{
+				playerK = france;
+				playerK.playerKingdom = "France";
 				valid = true;
 			}
 			else System.out.println("Sorry, that is not a valid kingdom");
 		} while (!valid);
 
-		//Playing as England
-		if (playerKingdom.equalsIgnoreCase("England"))
-		{
-			System.out.println("\nIt is the year 500 of your lord and savior, Jesus Christ. \nYou are the king of England.\n");
-			playerK.kingdomSummary();
-		}
+
+		System.out.println("\nIt is the year 500 of your lord and savior, Jesus Christ. \nYou are the king of " + playerK.playerKingdom + ".");
+		playerK.kingdomSummary();
+
 	}
 	
 	public void takeTurn()
@@ -75,6 +79,7 @@ public class Game
 			
 			if (input.equalsIgnoreCase("exit"))
 			{
+				System.out.println("Thank you for playing!\n");
 				return;
 			}
 			

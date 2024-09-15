@@ -2,6 +2,9 @@ import java.util.Random;
 
 public class Kingdom 
 {
+	// kingdom name
+	protected String playerKingdom;
+	
 	//population variables
 	protected double population;
 	protected double numChildren;
@@ -65,7 +68,7 @@ public class Kingdom
 	
 	public void kingdomSummary()
 	{
-		System.out.println("England- ");
+		System.out.println(playerKingdom + "- ");
 		System.out.println("Population size: " + (int)getKingdomPop());
 		
 		//totals for different age groups
