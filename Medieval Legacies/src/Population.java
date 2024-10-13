@@ -17,6 +17,10 @@ public class Population
 	public double getNumRebels() {
 		return numRebels;
 	}
+	
+	public void setNumKnights(double numKnights) {
+		this.numKnights = numKnights;
+	}
 
 	public void setNumRebels(double numRebels) {
 		this.numRebels = numRebels;

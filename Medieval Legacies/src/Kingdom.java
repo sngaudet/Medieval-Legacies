@@ -27,6 +27,14 @@ public class Kingdom
 		this.unrest = unrest;
 	}
 	
+	public double getNumKnights() {
+		return population.getNumKnights();
+	}
+	
+	public void setNumKnights(double numKnights) {
+		population.setNumKnights(numKnights);;
+	}
+	
 	public double getNumRebels() {
 		return population.getNumRebels();
 	}

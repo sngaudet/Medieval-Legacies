@@ -65,6 +65,7 @@ public class Game
 	{	
 		System.out.println("\n\nOptions: ");
 		System.out.println("1. Raise taxes ");
+		System.out.println("2. Fight rebels (if any...)");
 		System.out.println("End Turn (type end)");
 		System.out.println("End Game (type exit)");
 		boolean valid = false;
@@ -89,6 +90,12 @@ public class Game
 			else if (input.equalsIgnoreCase("1"))
 			{
 				raiseTaxes();	
+			}
+			
+			else if (input.equalsIgnoreCase("2"))
+			{
+				if (playerKingdom.getNumRebels() > 0) fightRebels();
+				else System.out.println("There is currently no rebellion...\n");
 			}
 			
 			else
@@ -168,5 +175,48 @@ public class Game
 		
 		System.out.println("\n" + (int)numRebels + " peasants have mustered together into a formidable fighting force.");
 		System.out.println("Your advisors report that " + (int)numPeasants + " peasants have remained loyal to you and continue to pay your taxes.");
+	}
+	
+	public void fightRebels()
+	{
+		double numKnights = playerKingdom.getNumKnights();
+		double numRebels = playerKingdom.getNumRebels();
+		double knightsRoll = r.nextInt(6);
+		knightsRoll += 1;
+		double knightsNumModifier = numKnights/30;
+		knightsRoll+=knightsNumModifier;
+		double rebelsRoll = r.nextInt(6);
+		
+		if (knightsRoll > rebelsRoll)
+		{
+			double percentCasualties = r.nextInt(100);
+			double casualties = numRebels/percentCasualties;
+			playerKingdom.setNumRebels(numRebels-casualties);
+			
+			System.out.println("After long hours of fighting you emerge victorious!");
+			System.out.println("\nKnights: " + (int)playerKingdom.getNumKnights());
+			System.out.println("\nRebels: " + (int)playerKingdom.getNumRebels());
+		}
+		else if (knightsRoll < rebelsRoll)
+		{
+			double percentCasualties = r.nextInt(100);
+			double casualties = numKnights/percentCasualties;
+			playerKingdom.setNumKnights(numKnights-casualties);
+			
+			System.out.println("After long hours of fighting you find the rebels have bested you...");
+			System.out.println("\nKnights: " + (int)playerKingdom.getNumKnights());
+			System.out.println("\nRebels: " + (int)playerKingdom.getNumRebels());
+		}
+		
+		if (playerKingdom.getNumRebels() <= 1)
+		{
+			playerKingdom.setNumRebels(0);
+			playerKingdom.setUnrest(0); // a successful war against the rebels means they have no desire to rebel again anytime soon.
+			System.out.println("\nVictory!!! The rebels are crushed...\n");
+		}
+		else
+		{
+			System.out.println("\nThe rebellion continues...\n");
+		}
 	}
 }
