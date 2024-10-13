@@ -127,17 +127,18 @@ public class Game
 				double income = playerKingdom.getIncome();
 				double numPeasants = playerKingdom.getNumPeasants();
 				playerKingdom.setIncome(numPeasants * taxRate);
-				playerKingdom.unrest += ((r.nextDouble() * 30) + 10); //could increase by as much as 40, and as little as 10 percent
+				double unrest = playerKingdom.getUnrest();
+				playerKingdom.setUnrest(unrest += ((r.nextDouble() * 30) + 10)); //could increase by as much as 40, and as little as 10 percent
 				System.out.println("New Tax Rate: " + (int)taxRate);
 				System.out.println("New Income per year: " + (int)income);
-				if (playerKingdom.unrest >= 100)
+				if (unrest >= 100)
 				{
 					System.out.println("\nRebellion! The peasantry has risen against you!!!");
 					peasantRebellion();
 				}
-				else if (playerKingdom.unrest > 90) System.out.println("As your palanquin was being escorted to the gardens, you heard many shouts of discontent, and your guards had to arrest several peasants who attempted to assault you...");
-				else if (playerKingdom.unrest > 70) System.out.println("Your advisors inform you that something must be done soon, lest the peasants rise in rebellion against you...");
-				else if (playerKingdom.unrest > 50) System.out.println("You hear rumblings of discontent amongst the peasantry...");
+				else if (unrest > 90) System.out.println("As your palanquin was being escorted to the gardens, you heard many shouts of discontent, and your guards had to arrest several peasants who attempted to assault you...");
+				else if (unrest > 70) System.out.println("Your advisors inform you that something must be done soon, lest the peasants rise in rebellion against you...");
+				else if (unrest > 50) System.out.println("You hear rumblings of discontent amongst the peasantry...");
 					
 				valid = true;
 			}

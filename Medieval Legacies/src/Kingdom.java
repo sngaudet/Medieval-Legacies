@@ -17,8 +17,16 @@ public class Kingdom
 	private Economy economy;
 	
 	//risk of rebellion (rebellion triggered at 100)
-	protected double unrest;
+	private double unrest;
 	
+	public double getUnrest() {
+		return unrest;
+	}
+
+	public void setUnrest(double unrest) {
+		this.unrest = unrest;
+	}
+
 	//amount of rebels if there is a rebellion
 	protected double numRebels;
 	
