@@ -10,6 +10,17 @@ public class Population
 	private double numFarmers;
 	private double numTradesmen;
 	private double numPeasants;
+	
+	//amount of rebels if there is a rebellion
+	private double numRebels;
+
+	public double getNumRebels() {
+		return numRebels;
+	}
+
+	public void setNumRebels(double numRebels) {
+		this.numRebels = numRebels;
+	}
 
 	private double growthRate;
 	

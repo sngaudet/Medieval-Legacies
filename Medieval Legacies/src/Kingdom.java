@@ -26,9 +26,14 @@ public class Kingdom
 	public void setUnrest(double unrest) {
 		this.unrest = unrest;
 	}
+	
+	public double getNumRebels() {
+		return population.getNumRebels();
+	}
 
-	//amount of rebels if there is a rebellion
-	protected double numRebels;
+	public void setNumRebels(double numRebels) {
+		population.setNumRebels(numRebels);;
+	}
 	
 	public Kingdom(int pop)
 	{

@@ -160,11 +160,12 @@ public class Game
 		double percentRebelled = r.nextDouble();
 		if (percentRebelled < .3) percentRebelled = .3;
 		else if (percentRebelled > .9) percentRebelled = .9;
-		playerKingdom.numRebels = numPeasants * percentRebelled;
+		playerKingdom.setNumRebels(numPeasants * percentRebelled);
 		
-		playerKingdom.setNumPeasants(numPeasants-=playerKingdom.numRebels);
+		double numRebels = playerKingdom.getNumRebels();
+		playerKingdom.setNumPeasants(numPeasants-=numRebels);
 		
-		System.out.println("\n" + (int)playerKingdom.numRebels + " peasants have mustered together into a formidable fighting force.");
+		System.out.println("\n" + (int)numRebels + " peasants have mustered together into a formidable fighting force.");
 		System.out.println("Your advisors report that " + (int)numPeasants + " peasants have remained loyal to you and continue to pay your taxes.");
 	}
 }
