@@ -3,8 +3,16 @@ import java.util.Random;
 public class Kingdom 
 {
 	// kingdom name
-	protected String playerKingdom;
+	private String setPlayerKingdomName;
 	
+	public String getPlayerKingdomName() {
+		return setPlayerKingdomName;
+	}
+
+	public void setPlayerKingdomName(String playerKingdomName) {
+		this.setPlayerKingdomName = playerKingdomName;
+	}
+
 	//population variables
 	protected double population;
 	protected double numChildren;
@@ -68,7 +76,7 @@ public class Kingdom
 	
 	public void kingdomSummary()
 	{
-		System.out.println(playerKingdom + "- ");
+		System.out.println(setPlayerKingdomName + "- ");
 		System.out.println("Population size: " + (int)getKingdomPop());
 		
 		//totals for different age groups

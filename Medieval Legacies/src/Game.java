@@ -7,20 +7,17 @@ public class Game
 	Random r = new Random();
 	
 	//in-game year (year is A.D. (also known as C.E.)
-	protected int year = 500;
+	private int year = 500;
 	
 	//Playable Kingdoms
-	Kingdom england = new Kingdom(100);
-	Kingdom france = new Kingdom(100);
+	private Kingdom england = new Kingdom(100);
+	private Kingdom france = new Kingdom(100);
 	
 	//Placeholder for the kingdom the player chooses
-	Kingdom playerK;
+	private Kingdom playerKingdom;
 	
 	//default constructor
-	public Game()
-	{
-		
-	}
+	public Game() {}
 	
 	/*
 	 * Begins the game by allowing the player to choose a starting kingdom
@@ -45,22 +42,22 @@ public class Game
 			String input = stdIn.next();
 			if (input.equalsIgnoreCase("England")) 
 			{
-				playerK = england;
-				playerK.playerKingdom = "England";
+				playerKingdom = england;
+				playerKingdom.setPlayerKingdomName(input);
 				valid = true;
 			}
 			else if (input.equalsIgnoreCase("France")) 
 			{
-				playerK = france;
-				playerK.playerKingdom = "France";
+				playerKingdom = france;
+				playerKingdom.setPlayerKingdomName(input);
 				valid = true;
 			}
 			else System.out.println("Sorry, that is not a valid kingdom");
 		} while (!valid);
 
 
-		System.out.println("\nIt is the year 500 of your lord and savior, Jesus Christ. \nYou are the king of " + playerK.playerKingdom + ".");
-		playerK.kingdomSummary();
+		System.out.println("\nIt is the year 500 of your lord and savior, Jesus Christ. \nYou are the king of " + playerKingdom.getPlayerKingdomName() + ".");
+		playerKingdom.kingdomSummary();
 
 	}
 	
@@ -107,50 +104,50 @@ public class Game
 	private void endTurn()
 	{
 		++year;
-		playerK.population = (playerK.population + (playerK.population * playerK.growthRate));
-		playerK.numChildren = (playerK.numChildren + (playerK.numChildren * playerK.growthRate));
-		playerK.numAdults = (playerK.numAdults + (playerK.numAdults * playerK.growthRate));
-		playerK.numElderly = (playerK.numElderly + (playerK.numElderly * playerK.growthRate));
-		playerK.numKnights = (playerK.numKnights + (playerK.numKnights * playerK.growthRate));
-		playerK.numFarmers = (playerK.numFarmers + (playerK.numFarmers * playerK.growthRate));
-		playerK.numTradesmen = (playerK.numTradesmen + (playerK.numTradesmen * playerK.growthRate));
-		playerK.numPeasants = (playerK.numPeasants + (playerK.numPeasants * playerK.growthRate));
+		playerKingdom.population = (playerKingdom.population + (playerKingdom.population * playerKingdom.growthRate));
+		playerKingdom.numChildren = (playerKingdom.numChildren + (playerKingdom.numChildren * playerKingdom.growthRate));
+		playerKingdom.numAdults = (playerKingdom.numAdults + (playerKingdom.numAdults * playerKingdom.growthRate));
+		playerKingdom.numElderly = (playerKingdom.numElderly + (playerKingdom.numElderly * playerKingdom.growthRate));
+		playerKingdom.numKnights = (playerKingdom.numKnights + (playerKingdom.numKnights * playerKingdom.growthRate));
+		playerKingdom.numFarmers = (playerKingdom.numFarmers + (playerKingdom.numFarmers * playerKingdom.growthRate));
+		playerKingdom.numTradesmen = (playerKingdom.numTradesmen + (playerKingdom.numTradesmen * playerKingdom.growthRate));
+		playerKingdom.numPeasants = (playerKingdom.numPeasants + (playerKingdom.numPeasants * playerKingdom.growthRate));
 		
-		playerK.foodSupply = (playerK.foodSupply - playerK.population) + playerK.foodSupply;
+		playerKingdom.foodSupply = (playerKingdom.foodSupply - playerKingdom.population) + playerKingdom.foodSupply;
 		
-		playerK.treasury = (playerK.treasury + playerK.income); 
-		playerK.income = playerK.numPeasants * playerK.taxRate;
+		playerKingdom.treasury = (playerKingdom.treasury + playerKingdom.income); 
+		playerKingdom.income = playerKingdom.numPeasants * playerKingdom.taxRate;
 		
 		System.out.println("\n            " + year + " A.D.\n");
 		
-		playerK.kingdomSummary();
+		playerKingdom.kingdomSummary();
 	}
 	
 	private void raiseTaxes()
 	{
 		String input;
 		boolean valid = false;
-		System.out.println("\nCurrent tax rate is " + (int)playerK.taxRate + " pounds per peasant.");
+		System.out.println("\nCurrent tax rate is " + (int)playerKingdom.taxRate + " pounds per peasant.");
 		do
 		{
-			System.out.print("Raise to " + (int)(playerK.taxRate + 5) + " pounds per peasant? ");
+			System.out.print("Raise to " + (int)(playerKingdom.taxRate + 5) + " pounds per peasant? ");
 			input = stdIn.next();
 			
 			if (input.equalsIgnoreCase("yes"))
 			{
-				playerK.taxRate += 5;
-				playerK.income = playerK.numPeasants * playerK.taxRate;
-				playerK.unrest += ((r.nextDouble() * 30) + 10); //could increase by as much as 40, and as little as 10 percent
-				System.out.println("New Tax Rate: " + (int)playerK.taxRate);
-				System.out.println("New Income per year: " + (int)playerK.income);
-				if (playerK.unrest >= 100)
+				playerKingdom.taxRate += 5;
+				playerKingdom.income = playerKingdom.numPeasants * playerKingdom.taxRate;
+				playerKingdom.unrest += ((r.nextDouble() * 30) + 10); //could increase by as much as 40, and as little as 10 percent
+				System.out.println("New Tax Rate: " + (int)playerKingdom.taxRate);
+				System.out.println("New Income per year: " + (int)playerKingdom.income);
+				if (playerKingdom.unrest >= 100)
 				{
 					System.out.println("\nRebellion! The peasantry has risen against you!!!");
 					peasantRebellion();
 				}
-				else if (playerK.unrest > 90) System.out.println("As your palanquin was being escorted to the gardens, you heard many shouts of discontent, and your guards had to arrest several peasants who attempted to assault you...");
-				else if (playerK.unrest > 70) System.out.println("Your advisors inform you that something must be done soon, lest the peasants rise in rebellion against you...");
-				else if (playerK.unrest > 50) System.out.println("You hear rumblings of discontent amongst the peasantry...");
+				else if (playerKingdom.unrest > 90) System.out.println("As your palanquin was being escorted to the gardens, you heard many shouts of discontent, and your guards had to arrest several peasants who attempted to assault you...");
+				else if (playerKingdom.unrest > 70) System.out.println("Your advisors inform you that something must be done soon, lest the peasants rise in rebellion against you...");
+				else if (playerKingdom.unrest > 50) System.out.println("You hear rumblings of discontent amongst the peasantry...");
 					
 				valid = true;
 			}
@@ -171,11 +168,11 @@ public class Game
 		double percentRebelled = r.nextDouble();
 		if (percentRebelled < .3) percentRebelled = .3;
 		else if (percentRebelled > .9) percentRebelled = .9;
-		playerK.numRebels = playerK.numPeasants * percentRebelled;
+		playerKingdom.numRebels = playerKingdom.numPeasants * percentRebelled;
 		
-		playerK.numPeasants -= playerK.numRebels;
+		playerKingdom.numPeasants -= playerKingdom.numRebels;
 		
-		System.out.println("\n" + (int)playerK.numRebels + " peasants have mustered together into a formidable fighting force.");
-		System.out.println("Your advisors report that " + (int)playerK.numPeasants + " peasants have remained loyal to you and continue to pay your taxes.");
+		System.out.println("\n" + (int)playerKingdom.numRebels + " peasants have mustered together into a formidable fighting force.");
+		System.out.println("Your advisors report that " + (int)playerKingdom.numPeasants + " peasants have remained loyal to you and continue to pay your taxes.");
 	}
 }
