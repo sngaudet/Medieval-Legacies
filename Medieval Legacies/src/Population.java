@@ -88,7 +88,7 @@ public class Population
 		this.numPeasants = numPeasants;
 	}
 	
-	public void passYear()
+	public void passYearPopulation()
 	{
 		population = (population + (population * growthRate));
 		numChildren = (numChildren + (numChildren * growthRate));

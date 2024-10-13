@@ -34,6 +34,10 @@ public class Economy
 		treasury = 10000;
 	}
 	
+	public void setTreasury(double treasury) {
+		this.treasury = treasury;
+	}
+	
 	public void setTaxRate(double taxRate) {
 		this.taxRate = taxRate;
 	}
@@ -42,7 +46,7 @@ public class Economy
 		this.income = income;
 	}
 	
-	public void passYear(double population, double numPeasants)
+	public void passYearEconomy(double population, double numPeasants)
 	{
 		foodSupply = (foodSupply - population) + foodSupply;
 		treasury = (treasury + income); 

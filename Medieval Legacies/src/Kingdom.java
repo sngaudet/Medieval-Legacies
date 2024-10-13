@@ -46,6 +46,10 @@ public class Kingdom
 		return population.getPopulation();
 	}
 	
+	public double getTreasury() {
+		return economy.getTreasury();
+	}
+	
 	public double getTaxRate()
 	{
 		return economy.getTaxRate();
@@ -57,6 +61,10 @@ public class Kingdom
 	
 	public double getNumPeasants() {
 		return population.getNumPeasants();
+	}
+	
+	public void setTreasury(double treasury) {
+		economy.setTreasury(treasury);
 	}
 	
 	public void setTaxRate(double taxRate) {
@@ -73,8 +81,8 @@ public class Kingdom
 	
 	public void passYear()
 	{
-		population.passYear();
-		economy.passYear(population.getPopulation(), population.getNumPeasants());
+		population.passYearPopulation();
+		economy.passYearEconomy(population.getPopulation(), population.getNumPeasants());
 	}
 	
 	public void kingdomSummary()

@@ -107,6 +107,7 @@ public class Game
 		
 		System.out.println("\n            " + year + " A.D.\n");
 		
+		playerKingdom.passYear();
 		playerKingdom.kingdomSummary();
 	}
 	
