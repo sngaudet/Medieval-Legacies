@@ -186,7 +186,7 @@ public class Game
 		double knightsNumModifier = numKnights/1000;
 		knightsRoll+=knightsNumModifier;
 		double rebelsRoll = r.nextInt(6);
-		double rebelsNumModifier = numRebels/1000;
+		double rebelsNumModifier = numRebels/3000;
 		rebelsRoll+=rebelsNumModifier;
 		
 		if (knightsRoll > rebelsRoll)
@@ -215,6 +215,11 @@ public class Game
 			playerKingdom.setNumRebels(0);
 			playerKingdom.setUnrest(0); // a successful war against the rebels means they have no desire to rebel again anytime soon.
 			System.out.println("\nVictory!!! The rebels numbers are so few that they cannot bare to fight any longer.\nThe rebels are crushed...\n");
+		}
+		else if (playerKingdom.getNumKnights() <= 100)
+		{
+			playerKingdom.setUnrest(0); // a successful war against the rebels means they have no desire to rebel again anytime soon.
+			System.out.println("\nDefeat... The knights' numbers are so few that they cannot bare to fight any longer.\n");
 		}
 		else
 		{
