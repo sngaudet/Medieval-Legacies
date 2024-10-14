@@ -10,8 +10,8 @@ public class Game
 	private int year = 500;
 	
 	//Playable Kingdoms
-	private Kingdom england = new Kingdom(100);
-	private Kingdom france = new Kingdom(100);
+	private Kingdom england = new Kingdom(100000);
+	private Kingdom france = new Kingdom(100000);
 	
 	//Placeholder for the kingdom the player chooses
 	private Kingdom playerKingdom;
@@ -183,14 +183,16 @@ public class Game
 		double numRebels = playerKingdom.getNumRebels();
 		double knightsRoll = r.nextInt(6);
 		knightsRoll += 1;
-		double knightsNumModifier = numKnights/30;
+		double knightsNumModifier = numKnights/1000;
 		knightsRoll+=knightsNumModifier;
 		double rebelsRoll = r.nextInt(6);
+		double rebelsNumModifier = numRebels/1000;
+		rebelsRoll+=rebelsNumModifier;
 		
 		if (knightsRoll > rebelsRoll)
 		{
-			double percentCasualties = r.nextInt(100);
-			double casualties = numRebels/percentCasualties;
+			double percentCasualties = r.nextDouble();
+			double casualties = numRebels*percentCasualties;
 			playerKingdom.setNumRebels(numRebels-casualties);
 			
 			System.out.println("After long hours of fighting you emerge victorious!");
@@ -199,8 +201,8 @@ public class Game
 		}
 		else if (knightsRoll < rebelsRoll)
 		{
-			double percentCasualties = r.nextInt(100);
-			double casualties = numKnights/percentCasualties;
+			double percentCasualties = r.nextDouble();
+			double casualties = numKnights*percentCasualties;
 			playerKingdom.setNumKnights(numKnights-casualties);
 			
 			System.out.println("After long hours of fighting you find the rebels have bested you...");
@@ -208,11 +210,11 @@ public class Game
 			System.out.println("\nRebels: " + (int)playerKingdom.getNumRebels());
 		}
 		
-		if (playerKingdom.getNumRebels() <= 1)
+		if (playerKingdom.getNumRebels() <= 1000)
 		{
 			playerKingdom.setNumRebels(0);
 			playerKingdom.setUnrest(0); // a successful war against the rebels means they have no desire to rebel again anytime soon.
-			System.out.println("\nVictory!!! The rebels are crushed...\n");
+			System.out.println("\nVictory!!! The rebels numbers are so few that they cannot bare to fight any longer.\nThe rebels are crushed...\n");
 		}
 		else
 		{
